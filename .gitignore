@@ -1,0 +1,65 @@
+# ============================================================
+# 老人跌倒项目 .gitignore
+# 原则: 版本库只装「代码 + 配置 + 文本文档 + 小分析产物」
+#       大二进制(模型/镜像/论文/可执行)不进库, 另行备份
+# ============================================================
+
+# --- 无关项目 (防诈骗数据爬虫, 混入本目录, 与老人跌倒无关) ---
+fraud_data_crawler/
+
+# --- 派生训练数据 (npz关键点序列 + 抽帧 + 提取日志) ---
+data/
+*.npz
+
+# --- 运行时产物 ---
+alerts/
+baselines/
+*.log
+
+# --- 模型 & 权重 ---
+*.pkl
+*.joblib
+*.task
+*.tflite
+*.onnx
+*.pt
+*.pth
+
+# --- 系统镜像 & 可执行 ---
+*.img
+*.img.xz
+*.exe
+*.bin
+*.o
+*.a
+*.so
+
+# --- 数据库 & 日志 ---
+*.db
+logs/
+
+# --- 论文/演示稿 (可从原始来源重新获取) ---
+*.pdf
+*.pptx
+*.docx
+*.doc
+
+# --- 生成的导出代码 (milkv-duos 5MB random_forest.c) ---
+deploy/milkv-duos/random_forest.c
+
+# --- legacy 大 CSV 数据 ---
+data_tools/huling_legacy/data/
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+.env
+
+# --- 编辑器/系统 ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

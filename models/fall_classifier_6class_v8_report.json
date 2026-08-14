@@ -1,0 +1,90 @@
+{
+  "version": "v8",
+  "classes": [
+    "Fall",
+    "SitDown",
+    "StandUp",
+    "Walking",
+    "WakeUp",
+    "Standing"
+  ],
+  "cv_accuracy_mean": 0.9044243745162918,
+  "cv_accuracy_std": 0.021686592893110212,
+  "cv_f1_mean": 0.9045433165240822,
+  "cv_f1_std": 0.021297139528060505,
+  "n_samples": 16343,
+  "n_groups": 855,
+  "best_params": {
+    "n_estimators": 400,
+    "max_depth": 8,
+    "learning_rate": 0.05,
+    "subsample": 0.85,
+    "colsample_bytree": 0.8,
+    "min_child_weight": 3,
+    "gamma": 0.05
+  },
+  "per_class_recall_mean": {
+    "Fall": 0.9618574261707223,
+    "SitDown": 0.826681261174909,
+    "StandUp": 0.8607592825460063,
+    "Walking": 0.9465138667227008,
+    "WakeUp": 0.8848577513619373,
+    "Standing": 0.9006564677374056
+  },
+  "per_class_recall_std": {
+    "Fall": 0.012262032800617804,
+    "SitDown": 0.06658524335504844,
+    "StandUp": 0.05412066197396108,
+    "Walking": 0.03340212330119413,
+    "WakeUp": 0.07345392664562135,
+    "Standing": 0.07233311402302119
+  },
+  "fold_accuracies": [
+    0.9002753135515448,
+    0.9357601713062098,
+    0.8696849189354543,
+    0.9005507955936353,
+    0.9158506731946144
+  ],
+  "fold_f1s": [
+    0.9016649454687811,
+    0.9358116037902666,
+    0.8701890156253501,
+    0.9010507494399342,
+    0.9140002682960784
+  ],
+  "fall_ap_mean": 0.9647603965020093,
+  "fall_ap_std": 0.01713466225125862,
+  "fall_roc_auc_mean": 0.9848328848496315,
+  "fall_roc_auc_std": 0.005092415058760557,
+  "event_level": {
+    "tp": 263,
+    "fp": 82,
+    "fn": 9,
+    "true_events": 272,
+    "pred_events": 345,
+    "total_windows": 10003,
+    "precision": 0.7623,
+    "recall": 0.9669,
+    "f1": 0.8525,
+    "false_alarm_per_1k_windows": 8.1975
+  },
+  "per_class_samples": {
+    "Fall": 4985,
+    "SitDown": 3501,
+    "StandUp": 1584,
+    "Walking": 1857,
+    "WakeUp": 3060,
+    "Standing": 1356
+  },
+  "data_sources": [
+    "subject_features",
+    "custom_6class",
+    "custom_5class",
+    "custom_standup_wakeup",
+    "custom_sitdown",
+    "urfd_features",
+    "le2i_features",
+    "upfall_features"
+  ]
+}

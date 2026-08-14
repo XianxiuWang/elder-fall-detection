@@ -1,0 +1,53 @@
+{
+  "version": "v5",
+  "classes": [
+    "Fall",
+    "SitDown",
+    "StandUp",
+    "Walking",
+    "WakeUp",
+    "Standing"
+  ],
+  "accuracy": 0.9871198568872988,
+  "precision": 0.9870953475065042,
+  "recall": 0.9871198568872988,
+  "f1": 0.9870948107084064,
+  "train_time_s": 6.6002421379089355,
+  "n_samples": 13971,
+  "best_params": {
+    "n_estimators": 400,
+    "max_depth": 8,
+    "learning_rate": 0.05,
+    "subsample": 0.85,
+    "colsample_bytree": 0.8,
+    "min_child_weight": 3,
+    "gamma": 0.05
+  },
+  "per_class": {
+    "Fall": 0.9859578736208626,
+    "SitDown": 1.0,
+    "StandUp": 0.9977924944812362,
+    "Walking": 0.9722222222222222,
+    "WakeUp": 1.0,
+    "Standing": 0.959409594095941
+  },
+  "cv_accuracy": 0.9898,
+  "cv_std": 0.001,
+  "cv_f1": 0.9898,
+  "data_sources": [
+    "subject_features",
+    "custom_6class",
+    "custom_5class",
+    "urfd_features",
+    "le2i_features",
+    "upfall_features"
+  ],
+  "per_class_samples": {
+    "Fall": 4985,
+    "SitDown": 1782,
+    "StandUp": 2262,
+    "Walking": 1798,
+    "WakeUp": 1788,
+    "Standing": 1356
+  }
+}

@@ -1,0 +1,18 @@
+# Orange Pi 5 Pro (RK3588S ARM64) 依赖
+# Python 3.10+ 推荐
+
+# 核心
+numpy>=2.0,<3.0
+scikit-learn>=1.5,<2.0
+xgboost>=2.0,<4.0
+
+# 视频处理（ARM64 有预编译轮子）
+opencv-python>=4.8
+
+# MediaPipe — ARM64 需要特定版本
+# 0.10.14 有 aarch64 轮子：pip install mediapipe==0.10.14
+# 如果安装失败，尝试：
+#   pip install mediapipe --only-binary=mediapipe
+# RK3588S NPU 加速版（可选，需自行编译）：
+#   https://github.com/rockchip-linux/rknn-toolkit2
+mediapipe>=0.10.14,<0.11

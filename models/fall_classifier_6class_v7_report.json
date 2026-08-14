@@ -1,0 +1,73 @@
+{
+  "version": "v7",
+  "classes": [
+    "Fall",
+    "SitDown",
+    "StandUp",
+    "Walking",
+    "WakeUp",
+    "Standing"
+  ],
+  "cv_accuracy_mean": 0.9104240298385307,
+  "cv_accuracy_std": 0.024076895646371412,
+  "cv_f1_mean": 0.9099335443660209,
+  "cv_f1_std": 0.024433837941632206,
+  "n_samples": 14624,
+  "n_groups": 772,
+  "best_params": {
+    "n_estimators": 400,
+    "max_depth": 8,
+    "learning_rate": 0.05,
+    "subsample": 0.85,
+    "colsample_bytree": 0.8,
+    "min_child_weight": 3,
+    "gamma": 0.05
+  },
+  "per_class_recall_mean": {
+    "Fall": 0.9665456561152244,
+    "SitDown": 0.548612387368111,
+    "StandUp": 0.8863705880047135,
+    "Walking": 0.936545901974959,
+    "WakeUp": 0.9145369639568536,
+    "Standing": 0.9208292596216289
+  },
+  "per_class_recall_std": {
+    "Fall": 0.008453997785050328,
+    "SitDown": 0.24525812951836445,
+    "StandUp": 0.05516984877339838,
+    "Walking": 0.04592363835365417,
+    "WakeUp": 0.06182772565359216,
+    "Standing": 0.066973200980669
+  },
+  "fold_accuracies": [
+    0.8970940170940171,
+    0.9234188034188034,
+    0.8947008547008547,
+    0.8854700854700854,
+    0.9514363885088919
+  ],
+  "fold_f1s": [
+    0.8969689388725217,
+    0.9231808590377633,
+    0.8940501715961959,
+    0.8840625385110629,
+    0.95140521381256
+  ],
+  "per_class_samples": {
+    "Fall": 4985,
+    "SitDown": 1782,
+    "StandUp": 1584,
+    "Walking": 1857,
+    "WakeUp": 3060,
+    "Standing": 1356
+  },
+  "data_sources": [
+    "subject_features",
+    "custom_6class",
+    "custom_5class",
+    "custom_standup_wakeup",
+    "urfd_features",
+    "le2i_features",
+    "upfall_features"
+  ]
+}

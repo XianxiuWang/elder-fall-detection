@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>护龄 — 独居老人居家安全监护系统</title>
+
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <!-- 字体图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ========== 全局样式 ========== */
+        :root {
+            --bg-primary: #0f1923;
+            --bg-secondary: #1a2735;
+            --bg-card: #1e2d3d;
+            --bg-card-hover: #253545;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --border-color: #30363d;
+            --accent: #58a6ff;
+            --danger: #f85149;
+            --warning: #d29922;
+            --success: #3fb950;
+            --orange: #ff7b72;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ========== 顶部导航 ========== */
+        .navbar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        .navbar-brand .icon {
+            font-size: 1.5em;
+        }
+
+        .navbar-status {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.9em;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .status-dot.online { background: var(--success); animation: pulse 2s infinite; }
+        .status-dot.offline { background: var(--text-secondary); }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .navbar-time {
+            color: var(--text-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ========== 主布局 ========== */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 16px;
+            padding: 16px 24px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .left-panel { display: flex; flex-direction: column; gap: 16px; }
+        .right-panel { display: flex; flex-direction: column; gap: 16px; }
+
+        /* ========== 卡片 ========== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: background 0.2s;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 0.95em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+
+        .card-title i { margin-right: 8px; color: var(--accent); }
+
+        /* ========== 健康指标卡片 ========== */
+        .vitals-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .vital-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .vital-card .label {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .vital-card .value {
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .vital-card .unit {
+            font-size: 0.6em;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .vital-card .sub {
+            font-size: 0.8em;
+            margin-top: 4px;
+        }
+
+        .vital-card.heart .value { color: #f85149; }
+        .vital-card.spo2 .value { color: #58a6ff; }
+        .vital-card.temp .value { color: #ff7b72; }
+        .vital-card.battery .value { color: #3fb950; }
+
+        /* ========== 视频区域 ========== */
+        .video-container {
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            max-height: 420px;
+        }
+
+        .video-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .video-overlay {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(0,0,0,0.7);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+
+        .video-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-secondary);
+        }
+
+        .video-placeholder i {
+            font-size: 3em;
+            margin-bottom: 12px;
+            opacity: 0.4;
+        }
+
+        /* ========== 突发告警横幅 ========== */
+        .alert-banner {
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: flash 1s ease-in-out 3;
+        }
+
+        .alert-banner.emergency {
+            background: linear-gradient(135deg, #f85149 0%, #8b0000 100%);
+            color: #fff;
+        }
+        .alert-banner.warning {
+            background: linear-gradient(135deg, #d29922 0%, #6b5200 100%);
+            color: #fff;
+        }
+        .alert-banner.normal {
+            background: linear-gradient(135deg, #238636 0%, #0d3320 100%);
+            color: #fff;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .alert-banner .icon { font-size: 1.5em; }
+
+        /* ========== 趋势图 ========== */
+        .chart-container {
+            position: relative;
+            height: 220px;
+        }
+
+        /* ========== 状态时间线 ========== */
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85em;
+        }
+
+        .timeline-item:last-child { border-bottom: none; }
+
+        .timeline-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .timeline-dot.green { background: var(--success); }
+        .timeline-dot.yellow { background: var(--warning); }
+        .timeline-dot.orange { background: var(--orange); }
+        .timeline-dot.red { background: var(--danger); }
+
+        .timeline-time {
+            color: var(--text-secondary);
+            min-width: 48px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ========== 告警记录 ========== */
+        .alert-list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85em;
+        }
+
+        .alert-list-item .level-icon {
+            font-size: 1.2em;
+            padding-top: 2px;
+        }
+
+        .alert-list-item .alert-time {
+            color: var(--text-secondary);
+            font-size: 0.8em;
+            margin-top: 3px;
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 1024px) {
+            .main-container { grid-template-columns: 1fr; }
+            .vitals-row { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .vitals-row { grid-template-columns: 1fr 1fr; }
+            .navbar { flex-direction: column; gap: 8px; }
+        }
+
+        /* ========== 滚动条 ========== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <!-- ========== 顶部导航 ========== -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span class="icon">🛡️</span>
+            <span>护龄 · 居家安全监护</span>
+        </div>
+        <div class="navbar-status">
+            <span>
+                <span class="status-dot" id="status-dot">●</span>
+                <span id="status-text">连接中...</span>
+            </span>
+            <span>设备: <strong id="device-id">—</strong></span>
+            <span class="navbar-time" id="current-time"></span>
+        </div>
+    </nav>
+
+    <!-- ========== 告警横幅 ========== -->
+    <div style="padding: 8px 24px 0 24px; max-width: 1600px; margin: 0 auto;">
+        <div id="alert-banner" class="alert-banner normal" style="display: none;">
+            <span class="icon" id="alert-banner-icon">🟢</span>
+            <span id="alert-banner-text">系统运行正常</span>
+        </div>
+    </div>
+
+    <!-- ========== 主内容区 ========== -->
+    <div class="main-container">
+
+        <!-- 左侧面板 -->
+        <div class="left-panel">
+
+            <!-- 生命体征卡片 -->
+            <div class="vitals-row">
+                <div class="vital-card heart">
+                    <div class="label">❤️ 心率</div>
+                    <div class="value" id="hr-value">—</div>
+                    <div class="unit">bpm</div>
+                    <div class="sub" id="hr-sub"></div>
+                </div>
+                <div class="vital-card spo2">
+                    <div class="label">🫁 血氧</div>
+                    <div class="value" id="spo2-value">—</div>
+                    <div class="unit">% SpO₂</div>
+                    <div class="sub" id="spo2-sub"></div>
+                </div>
+                <div class="vital-card temp">
+                    <div class="label">🌡️ 体温</div>
+                    <div class="value" id="temp-value">—</div>
+                    <div class="unit">°C</div>
+                    <div class="sub" id="temp-sub"></div>
+                </div>
+                <div class="vital-card battery">
+                    <div class="label">🔋 电量</div>
+                    <div class="value" id="battery-value">—</div>
+                    <div class="unit">%</div>
+                    <div class="sub" id="battery-sub"></div>
+                </div>
+            </div>
+
+            <!-- 当前状态 + 视频 -->
+            <div class="card" style="padding: 12px;">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-video"></i> 实时画面</span>
+                    <span style="font-size: 0.85em;" id="state-badge">
+                        <span id="current-state-name">等待数据...</span>
+                        <span id="current-confidence" style="color: var(--text-secondary);"></span>
+                    </span>
+                </div>
+                <div class="video-container" id="video-container">
+                    <!-- 默认占位 -->
+                    <div class="video-placeholder" id="video-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <p>摄像头未启用或未连接</p>
+                    </div>
+                    <img id="video-feed" src="/video_feed" alt="实时画面"
+                         style="display: none;"
+                         onload="document.getElementById('video-placeholder').style.display='none'; this.style.display='block';"
+                         onerror="this.style.display='none'; document.getElementById('video-placeholder').style.display='flex';">
+                </div>
+            </div>
+
+            <!-- 趋势图表 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-chart-line"></i> 生命体征趋势 (24h)</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="vitalChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧面板 -->
+        <div class="right-panel">
+
+            <!-- 当前详细状态 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-info-circle"></i> 当前状态</span>
+                </div>
+                <div style="text-align: center; padding: 10px 0 15px;">
+                    <div style="font-size: 3em;" id="big-state-icon">⏳</div>
+                    <div style="font-size: 1.4em; font-weight: 700; margin: 8px 0;" id="big-state-name">等待数据</div>
+                    <div style="font-size: 0.85em; color: var(--text-secondary);" id="big-state-conf"></div>
+                </div>
+                <!-- 无人活动计时（仅在无人状态时显示） -->
+                <div id="inactive-timer-box" style="display: none; text-align: center; padding: 10px; margin: 8px 0; background: rgba(248,81,73,0.1); border: 1px solid rgba(248,81,73,0.3); border-radius: 8px;">
+                    <div style="font-size: 0.75em; color: var(--text-secondary); margin-bottom: 4px;">
+                        ⏱ 白天累计无人活动（<span id="inactive-daytime-range">—</span> 计时，黑夜暂停）
+                    </div>
+                    <div style="font-size: 1.8em; font-weight: 700; color: var(--danger);" id="inactive-timer">0小时0分钟</div>
+                    <div style="font-size: 0.75em; color: var(--text-secondary); margin-top: 4px;">
+                        告警阈值：<span id="inactive-threshold" style="color: var(--warning);"></span>
+                    </div>
+                </div>
+                <div style="font-size: 0.85em; color: var(--text-secondary);">
+                    <div>上次更新: <span id="last-update-time" style="color: var(--text-primary);">—</span></div>
+                    <div>告警级别: <span id="alert-level-text" style="color: var(--text-primary);">—</span></div>
+                </div>
+            </div>
+
+            <!-- 状态时间线 -->
+            <div class="card" style="max-height: 320px; overflow-y: auto;">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-history"></i> 状态时间线</span>
+                </div>
+                <div id="timeline-container">
+                    <div style="color: var(--text-secondary); text-align: center; padding: 20px;">
+                        等待数据推送...
+                    </div>
+                </div>
+            </div>
+
+            <!-- 告警记录 -->
+            <div class="card" style="max-height: 300px; overflow-y: auto;">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-exclamation-triangle"></i> 告警记录</span>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="alert-count">0 条</span>
+                </div>
+                <div id="alert-list">
+                    <div style="color: var(--text-secondary); text-align: center; padding: 20px;">
+                        暂无告警
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

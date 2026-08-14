@@ -1,0 +1,30 @@
+{
+  "classes": [
+    "Fall",
+    "SitDown",
+    "StandUp",
+    "Walking",
+    "WakeUp",
+    "Standing"
+  ],
+  "accuracy": 0.9716024340770791,
+  "f1": 0.9716908590690156,
+  "thresholds": {
+    "Fall": 0.21999999999999997,
+    "SitDown": 0.4699999999999999,
+    "StandUp": 0.31999999999999995,
+    "Walking": 0.5499999999999999,
+    "WakeUp": 0.7699999999999999,
+    "Standing": 0.6699999999999999
+  },
+  "per_class": {
+    "Fall": 0.9541666666666667,
+    "SitDown": 0.94,
+    "StandUp": 0.984375,
+    "Walking": 1.0,
+    "WakeUp": 0.99375,
+    "Standing": 0.95
+  },
+  "cv_accuracy": 0.9875369298461043,
+  "cv_f1": 0.9875181330573108
+}

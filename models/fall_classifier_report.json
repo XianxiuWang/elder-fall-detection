@@ -1,0 +1,77 @@
+{
+  "cv": {
+    "accuracy": 0.987158618757878,
+    "accuracy_std": 0.0022307973721435188,
+    "precision": 0.9815252935029811,
+    "precision_std": 0.01162866373120047,
+    "recall": 0.9655172413793103,
+    "recall_std": 0.010280772310343899,
+    "f1": 0.9733542238066036,
+    "f1_std": 0.004607625612520098,
+    "roc_auc": 0.9991861460196751,
+    "roc_auc_std": 0.0005382359952963222
+  },
+  "eval": {
+    "accuracy": 0.9860724233983287,
+    "precision": 1.0,
+    "recall": 0.9425287356321839,
+    "f1": 0.9704142011834319,
+    "roc_auc": 0.9991970926301554,
+    "confusion_matrix": {
+      "TP": 82,
+      "FP": 0,
+      "TN": 272,
+      "FN": 5
+    },
+    "threshold": 0.6
+  },
+  "train_time_s": 1.6422605514526367,
+  "n_samples": 1791,
+  "n_features": 42,
+  "top_n_features": 20,
+  "model_type": "lgb",
+  "window_size": 30,
+  "window_stride": 5,
+  "top_10_features": [
+    {
+      "feature": "head_y_max",
+      "importance": 240.0
+    },
+    {
+      "feature": "hip_knee_ankle_spread_min",
+      "importance": 228.0
+    },
+    {
+      "feature": "hip_knee_ankle_spread_start",
+      "importance": 191.0
+    },
+    {
+      "feature": "head_vy_max",
+      "importance": 176.0
+    },
+    {
+      "feature": "torso_y_min",
+      "importance": 167.0
+    },
+    {
+      "feature": "elbow_wrist_dist",
+      "importance": 156.0
+    },
+    {
+      "feature": "torso_y_range",
+      "importance": 132.0
+    },
+    {
+      "feature": "ankle_y_range",
+      "importance": 119.0
+    },
+    {
+      "feature": "head_y_min",
+      "importance": 118.0
+    },
+    {
+      "feature": "spread_max",
+      "importance": 118.0
+    }
+  ]
+}

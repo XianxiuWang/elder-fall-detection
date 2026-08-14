@@ -1,0 +1,715 @@
+{
+  "summary": {
+    "tp": 30,
+    "fn": 0,
+    "fp": 0,
+    "tn": 40,
+    "recall": 1.0,
+    "specificity": 1.0,
+    "total_sequences": 70,
+    "total_windows": 74532,
+    "elapsed_s": 7.51
+  },
+  "results": [
+    {
+      "name": "adl-01",
+      "label": 0,
+      "predicted": 0,
+      "frames": 139,
+      "max_prob": 0.07326718407697567,
+      "status": "OK",
+      "inferences": 22,
+      "avg_ms": 77.57
+    },
+    {
+      "name": "adl-02",
+      "label": 0,
+      "predicted": 0,
+      "frames": 144,
+      "max_prob": 0.07599295803876505,
+      "status": "OK",
+      "inferences": 45,
+      "avg_ms": 39.34
+    },
+    {
+      "name": "adl-03",
+      "label": 0,
+      "predicted": 0,
+      "frames": 176,
+      "max_prob": 0.032356907496811894,
+      "status": "OK",
+      "inferences": 75,
+      "avg_ms": 24.6
+    },
+    {
+      "name": "adl-04",
+      "label": 0,
+      "predicted": 0,
+      "frames": 149,
+      "max_prob": 0.023819980595223694,
+      "status": "OK",
+      "inferences": 99,
+      "avg_ms": 19.2
+    },
+    {
+      "name": "adl-05",
+      "label": 0,
+      "predicted": 0,
+      "frames": 177,
+      "max_prob": 0.03535432878352009,
+      "status": "OK",
+      "inferences": 129,
+      "avg_ms": 15.31
+    },
+    {
+      "name": "adl-06",
+      "label": 0,
+      "predicted": 0,
+      "frames": 205,
+      "max_prob": 0.04151500773045673,
+      "status": "OK",
+      "inferences": 165,
+      "avg_ms": 12.59
+    },
+    {
+      "name": "adl-07",
+      "label": 0,
+      "predicted": 0,
+      "frames": 176,
+      "max_prob": 0.03949333552956173,
+      "status": "OK",
+      "inferences": 195,
+      "avg_ms": 11.01
+    },
+    {
+      "name": "adl-08",
+      "label": 0,
+      "predicted": 0,
+      "frames": 180,
+      "max_prob": 0.04738182801186945,
+      "status": "OK",
+      "inferences": 226,
+      "avg_ms": 9.84
+    },
+    {
+      "name": "adl-09",
+      "label": 0,
+      "predicted": 0,
+      "frames": 149,
+      "max_prob": 0.043852756259959845,
+      "status": "OK",
+      "inferences": 250,
+      "avg_ms": 9.17
+    },
+    {
+      "name": "adl-10",
+      "label": 0,
+      "predicted": 0,
+      "frames": 300,
+      "max_prob": 0.09519031506358604,
+      "status": "OK",
+      "inferences": 305,
+      "avg_ms": 7.95
+    },
+    {
+      "name": "adl-11",
+      "label": 0,
+      "predicted": 0,
+      "frames": 285,
+      "max_prob": 0.2593442717156835,
+      "status": "OK",
+      "inferences": 357,
+      "avg_ms": 7.13
+    },
+    {
+      "name": "adl-12",
+      "label": 0,
+      "predicted": 0,
+      "frames": 250,
+      "max_prob": 0.036111587263633164,
+      "status": "OK",
+      "inferences": 402,
+      "avg_ms": 6.61
+    },
+    {
+      "name": "adl-13",
+      "label": 0,
+      "predicted": 0,
+      "frames": 193,
+      "max_prob": 0.050081247621238896,
+      "status": "OK",
+      "inferences": 435,
+      "avg_ms": 6.3
+    },
+    {
+      "name": "adl-14",
+      "label": 0,
+      "predicted": 0,
+      "frames": 175,
+      "max_prob": 0.18910171008930837,
+      "status": "OK",
+      "inferences": 465,
+      "avg_ms": 6.06
+    },
+    {
+      "name": "adl-15",
+      "label": 0,
+      "predicted": 0,
+      "frames": 208,
+      "max_prob": 0.02486620467303373,
+      "status": "OK",
+      "inferences": 501,
+      "avg_ms": 5.84
+    },
+    {
+      "name": "adl-16",
+      "label": 0,
+      "predicted": 0,
+      "frames": 164,
+      "max_prob": 0.08738446191918542,
+      "status": "OK",
+      "inferences": 528,
+      "avg_ms": 5.68
+    },
+    {
+      "name": "adl-17",
+      "label": 0,
+      "predicted": 0,
+      "frames": 165,
+      "max_prob": 0.01774538419149755,
+      "status": "OK",
+      "inferences": 556,
+      "avg_ms": 5.53
+    },
+    {
+      "name": "adl-18",
+      "label": 0,
+      "predicted": 0,
+      "frames": 173,
+      "max_prob": 0.07443207437194017,
+      "status": "OK",
+      "inferences": 585,
+      "avg_ms": 5.4
+    },
+    {
+      "name": "adl-19",
+      "label": 0,
+      "predicted": 0,
+      "frames": 171,
+      "max_prob": 0.021200039141305346,
+      "status": "OK",
+      "inferences": 614,
+      "avg_ms": 5.26
+    },
+    {
+      "name": "adl-20",
+      "label": 0,
+      "predicted": 0,
+      "frames": 194,
+      "max_prob": 0.019737553162131428,
+      "status": "OK",
+      "inferences": 647,
+      "avg_ms": 5.13
+    },
+    {
+      "name": "adl-21",
+      "label": 0,
+      "predicted": 0,
+      "frames": 203,
+      "max_prob": 0.010994328804391131,
+      "status": "OK",
+      "inferences": 682,
+      "avg_ms": 5.0
+    },
+    {
+      "name": "adl-22",
+      "label": 0,
+      "predicted": 0,
+      "frames": 186,
+      "max_prob": 0.0342123948360264,
+      "status": "OK",
+      "inferences": 714,
+      "avg_ms": 4.89
+    },
+    {
+      "name": "adl-23",
+      "label": 0,
+      "predicted": 0,
+      "frames": 184,
+      "max_prob": 0.007570301315225043,
+      "status": "OK",
+      "inferences": 745,
+      "avg_ms": 4.79
+    },
+    {
+      "name": "adl-24",
+      "label": 0,
+      "predicted": 0,
+      "frames": 70,
+      "max_prob": 0.005329234380076642,
+      "status": "OK",
+      "inferences": 754,
+      "avg_ms": 4.76
+    },
+    {
+      "name": "adl-25",
+      "label": 0,
+      "predicted": 0,
+      "frames": 110,
+      "max_prob": 0.03543173095268562,
+      "status": "OK",
+      "inferences": 771,
+      "avg_ms": 4.71
+    },
+    {
+      "name": "adl-26",
+      "label": 0,
+      "predicted": 0,
+      "frames": 94,
+      "max_prob": 0.06853516123391482,
+      "status": "OK",
+      "inferences": 784,
+      "avg_ms": 4.67
+    },
+    {
+      "name": "adl-27",
+      "label": 0,
+      "predicted": 0,
+      "frames": 100,
+      "max_prob": 0.016229332050771334,
+      "status": "OK",
+      "inferences": 799,
+      "avg_ms": 4.64
+    },
+    {
+      "name": "adl-28",
+      "label": 0,
+      "predicted": 0,
+      "frames": 84,
+      "max_prob": 0.1328957758330303,
+      "status": "OK",
+      "inferences": 810,
+      "avg_ms": 4.62
+    },
+    {
+      "name": "adl-29",
+      "label": 0,
+      "predicted": 0,
+      "frames": 125,
+      "max_prob": 0.02866897664519725,
+      "status": "OK",
+      "inferences": 830,
+      "avg_ms": 4.58
+    },
+    {
+      "name": "adl-30",
+      "label": 0,
+      "predicted": 0,
+      "frames": 350,
+      "max_prob": 0.29720553874370137,
+      "status": "OK",
+      "inferences": 895,
+      "avg_ms": 4.43
+    },
+    {
+      "name": "adl-31",
+      "label": 0,
+      "predicted": 0,
+      "frames": 250,
+      "max_prob": 0.15633599929351352,
+      "status": "OK",
+      "inferences": 940,
+      "avg_ms": 4.34
+    },
+    {
+      "name": "adl-32",
+      "label": 0,
+      "predicted": 0,
+      "frames": 200,
+      "max_prob": 0.08163702559370813,
+      "status": "OK",
+      "inferences": 975,
+      "avg_ms": 4.27
+    },
+    {
+      "name": "adl-33",
+      "label": 0,
+      "predicted": 0,
+      "frames": 199,
+      "max_prob": 0.05928822086165918,
+      "status": "OK",
+      "inferences": 1009,
+      "avg_ms": 4.21
+    },
+    {
+      "name": "adl-34",
+      "label": 0,
+      "predicted": 0,
+      "frames": 191,
+      "max_prob": 0.09646336439712856,
+      "status": "OK",
+      "inferences": 1042,
+      "avg_ms": 4.16
+    },
+    {
+      "name": "adl-35",
+      "label": 0,
+      "predicted": 0,
+      "frames": 280,
+      "max_prob": 0.34515516172287986,
+      "status": "OK",
+      "inferences": 1093,
+      "avg_ms": 4.09
+    },
+    {
+      "name": "adl-36",
+      "label": 0,
+      "predicted": 0,
+      "frames": 310,
+      "max_prob": 0.06682278167193166,
+      "status": "OK",
+      "inferences": 1150,
+      "avg_ms": 4.0
+    },
+    {
+      "name": "adl-37",
+      "label": 0,
+      "predicted": 0,
+      "frames": 318,
+      "max_prob": 0.1089746323462492,
+      "status": "OK",
+      "inferences": 1208,
+      "avg_ms": 3.93
+    },
+    {
+      "name": "adl-38",
+      "label": 0,
+      "predicted": 0,
+      "frames": 316,
+      "max_prob": 0.0580919203346465,
+      "status": "OK",
+      "inferences": 1266,
+      "avg_ms": 3.88
+    },
+    {
+      "name": "adl-39",
+      "label": 0,
+      "predicted": 0,
+      "frames": 235,
+      "max_prob": 0.25803593710578826,
+      "status": "OK",
+      "inferences": 1308,
+      "avg_ms": 3.83
+    },
+    {
+      "name": "adl-40",
+      "label": 0,
+      "predicted": 0,
+      "frames": 265,
+      "max_prob": 0.07761134673048824,
+      "status": "OK",
+      "inferences": 1356,
+      "avg_ms": 3.78
+    },
+    {
+      "name": "fall-01",
+      "label": 1,
+      "predicted": 1,
+      "frames": 160,
+      "max_prob": 0.9984794577401479,
+      "status": "OK",
+      "inferences": 1383,
+      "avg_ms": 3.75
+    },
+    {
+      "name": "fall-02",
+      "label": 1,
+      "predicted": 1,
+      "frames": 110,
+      "max_prob": 0.9993420603151996,
+      "status": "OK",
+      "inferences": 1400,
+      "avg_ms": 3.74
+    },
+    {
+      "name": "fall-03",
+      "label": 1,
+      "predicted": 1,
+      "frames": 214,
+      "max_prob": 0.9961718674601396,
+      "status": "OK",
+      "inferences": 1437,
+      "avg_ms": 3.71
+    },
+    {
+      "name": "fall-04",
+      "label": 1,
+      "predicted": 1,
+      "frames": 95,
+      "max_prob": 0.9993970143413632,
+      "status": "OK",
+      "inferences": 1451,
+      "avg_ms": 3.7
+    },
+    {
+      "name": "fall-05",
+      "label": 1,
+      "predicted": 1,
+      "frames": 150,
+      "max_prob": 0.9983641812973428,
+      "status": "OK",
+      "inferences": 1476,
+      "avg_ms": 3.68
+    },
+    {
+      "name": "fall-06",
+      "label": 1,
+      "predicted": 1,
+      "frames": 100,
+      "max_prob": 0.9987992210005783,
+      "status": "OK",
+      "inferences": 1491,
+      "avg_ms": 3.67
+    },
+    {
+      "name": "fall-07",
+      "label": 1,
+      "predicted": 1,
+      "frames": 155,
+      "max_prob": 0.9988552269569054,
+      "status": "OK",
+      "inferences": 1517,
+      "avg_ms": 3.65
+    },
+    {
+      "name": "fall-08",
+      "label": 1,
+      "predicted": 1,
+      "frames": 90,
+      "max_prob": 0.9963858872136949,
+      "status": "OK",
+      "inferences": 1530,
+      "avg_ms": 3.65
+    },
+    {
+      "name": "fall-09",
+      "label": 1,
+      "predicted": 1,
+      "frames": 185,
+      "max_prob": 0.9991492639519202,
+      "status": "OK",
+      "inferences": 1562,
+      "avg_ms": 3.63
+    },
+    {
+      "name": "fall-10",
+      "label": 1,
+      "predicted": 1,
+      "frames": 129,
+      "max_prob": 0.9989047568971181,
+      "status": "OK",
+      "inferences": 1582,
+      "avg_ms": 3.61
+    },
+    {
+      "name": "fall-11",
+      "label": 1,
+      "predicted": 1,
+      "frames": 129,
+      "max_prob": 0.9981417527516145,
+      "status": "OK",
+      "inferences": 1602,
+      "avg_ms": 3.6
+    },
+    {
+      "name": "fall-12",
+      "label": 1,
+      "predicted": 1,
+      "frames": 109,
+      "max_prob": 0.9966843673848764,
+      "status": "OK",
+      "inferences": 1618,
+      "avg_ms": 3.68
+    },
+    {
+      "name": "fall-13",
+      "label": 1,
+      "predicted": 1,
+      "frames": 85,
+      "max_prob": 0.9986364476181887,
+      "status": "OK",
+      "inferences": 1630,
+      "avg_ms": 3.7
+    },
+    {
+      "name": "fall-14",
+      "label": 1,
+      "predicted": 1,
+      "frames": 61,
+      "max_prob": 0.990473452695417,
+      "status": "OK",
+      "inferences": 1637,
+      "avg_ms": 3.71
+    },
+    {
+      "name": "fall-15",
+      "label": 1,
+      "predicted": 1,
+      "frames": 70,
+      "max_prob": 0.9996066609476592,
+      "status": "OK",
+      "inferences": 1646,
+      "avg_ms": 3.72
+    },
+    {
+      "name": "fall-16",
+      "label": 1,
+      "predicted": 1,
+      "frames": 54,
+      "max_prob": 0.9971018720115634,
+      "status": "OK",
+      "inferences": 1651,
+      "avg_ms": 3.73
+    },
+    {
+      "name": "fall-17",
+      "label": 1,
+      "predicted": 1,
+      "frames": 94,
+      "max_prob": 0.9995865268486617,
+      "status": "OK",
+      "inferences": 1664,
+      "avg_ms": 3.75
+    },
+    {
+      "name": "fall-18",
+      "label": 1,
+      "predicted": 1,
+      "frames": 65,
+      "max_prob": 0.9990062850680302,
+      "status": "OK",
+      "inferences": 1672,
+      "avg_ms": 3.76
+    },
+    {
+      "name": "fall-19",
+      "label": 1,
+      "predicted": 1,
+      "frames": 99,
+      "max_prob": 0.9993509398164214,
+      "status": "OK",
+      "inferences": 1686,
+      "avg_ms": 3.79
+    },
+    {
+      "name": "fall-20",
+      "label": 1,
+      "predicted": 1,
+      "frames": 110,
+      "max_prob": 0.9977118176698806,
+      "status": "OK",
+      "inferences": 1703,
+      "avg_ms": 3.81
+    },
+    {
+      "name": "fall-21",
+      "label": 1,
+      "predicted": 1,
+      "frames": 54,
+      "max_prob": 0.9995230232773025,
+      "status": "OK",
+      "inferences": 1708,
+      "avg_ms": 3.82
+    },
+    {
+      "name": "fall-22",
+      "label": 1,
+      "predicted": 1,
+      "frames": 56,
+      "max_prob": 0.9986754804460093,
+      "status": "OK",
+      "inferences": 1714,
+      "avg_ms": 3.83
+    },
+    {
+      "name": "fall-23",
+      "label": 1,
+      "predicted": 1,
+      "frames": 74,
+      "max_prob": 0.9994611401987682,
+      "status": "OK",
+      "inferences": 1723,
+      "avg_ms": 3.83
+    },
+    {
+      "name": "fall-24",
+      "label": 1,
+      "predicted": 1,
+      "frames": 59,
+      "max_prob": 0.9989183800980945,
+      "status": "OK",
+      "inferences": 1729,
+      "avg_ms": 3.84
+    },
+    {
+      "name": "fall-25",
+      "label": 1,
+      "predicted": 1,
+      "frames": 84,
+      "max_prob": 0.9988464561353687,
+      "status": "OK",
+      "inferences": 1740,
+      "avg_ms": 3.86
+    },
+    {
+      "name": "fall-26",
+      "label": 1,
+      "predicted": 1,
+      "frames": 61,
+      "max_prob": 0.9989340009351891,
+      "status": "OK",
+      "inferences": 1747,
+      "avg_ms": 3.86
+    },
+    {
+      "name": "fall-27",
+      "label": 1,
+      "predicted": 1,
+      "frames": 92,
+      "max_prob": 0.9971630969000711,
+      "status": "OK",
+      "inferences": 1760,
+      "avg_ms": 3.88
+    },
+    {
+      "name": "fall-28",
+      "label": 1,
+      "predicted": 1,
+      "frames": 66,
+      "max_prob": 0.9992075303958631,
+      "status": "OK",
+      "inferences": 1768,
+      "avg_ms": 3.88
+    },
+    {
+      "name": "fall-29",
+      "label": 1,
+      "predicted": 1,
+      "frames": 99,
+      "max_prob": 0.9989843139850194,
+      "status": "OK",
+      "inferences": 1782,
+      "avg_ms": 3.9
+    },
+    {
+      "name": "fall-30",
+      "label": 1,
+      "predicted": 1,
+      "frames": 70,
+      "max_prob": 0.9989706497219907,
+      "status": "OK",
+      "inferences": 1791,
+      "avg_ms": 3.9
+    }
+  ]
+}

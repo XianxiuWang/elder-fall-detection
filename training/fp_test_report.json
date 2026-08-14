@@ -1,0 +1,176 @@
+{
+  "model": "V6 (59维, 98.90%)",
+  "total_elapsed_s": 692.0,
+  "videos": {
+    "jumping": {
+      "video": "50个跳跃的动作.mp4",
+      "type": "non-fall",
+      "total_predictions": 316,
+      "raw_falls": 44,
+      "filt_falls": 28,
+      "raw_fpr_pct": 13.92,
+      "filt_fpr_pct": 8.86,
+      "fall_events": 3,
+      "event_details": [
+        {
+          "start": 50.43,
+          "end": 60.18,
+          "max_prob": 0.993,
+          "duration": 9.8
+        },
+        {
+          "start": 110.99,
+          "end": 110.99,
+          "max_prob": 0.003,
+          "duration": 0.0
+        },
+        {
+          "start": 197.7,
+          "end": 207.96,
+          "max_prob": 0.36,
+          "duration": 10.3
+        }
+      ],
+      "verdict": "❌ FAIL — 8.9% 误报率，需追加难例数据",
+      "elapsed_s": 154.2,
+      "inference_fps": 2.0
+    },
+    "sitting": {
+      "video": "50个坐下的动作.mp4",
+      "type": "non-fall",
+      "total_predictions": 313,
+      "raw_falls": 58,
+      "filt_falls": 10,
+      "raw_fpr_pct": 18.53,
+      "filt_fpr_pct": 3.19,
+      "fall_events": 1,
+      "event_details": [
+        {
+          "start": 143.39,
+          "end": 150.4,
+          "max_prob": 0.315,
+          "duration": 7.0
+        }
+      ],
+      "verdict": "❌ FAIL — 3.2% 误报率，需追加难例数据",
+      "elapsed_s": 95.7,
+      "inference_fps": 3.3
+    },
+    "pickup": {
+      "video": "50 Ways to Pick Up a Dollar50种捡起一美元的方式.mp4",
+      "type": "non-fall",
+      "total_predictions": 307,
+      "raw_falls": 173,
+      "filt_falls": 205,
+      "raw_fpr_pct": 56.35,
+      "filt_fpr_pct": 66.78,
+      "fall_events": 4,
+      "event_details": [
+        {
+          "start": 32.37,
+          "end": 104.25,
+          "max_prob": 0.999,
+          "duration": 71.9
+        },
+        {
+          "start": 112.62,
+          "end": 180.25,
+          "max_prob": 0.998,
+          "duration": 67.6
+        },
+        {
+          "start": 223.5,
+          "end": 236.12,
+          "max_prob": 0.927,
+          "duration": 12.6
+        },
+        {
+          "start": 238.62,
+          "end": 242.37,
+          "max_prob": 0.478,
+          "duration": 3.8
+        }
+      ],
+      "verdict": "❌ FAIL — 66.8% 误报率，需追加难例数据",
+      "elapsed_s": 96.4,
+      "inference_fps": 3.2
+    },
+    "walk": {
+      "video": "100 Ways to Walk100种走路方式.mp4",
+      "type": "non-fall",
+      "total_predictions": 496,
+      "raw_falls": 5,
+      "filt_falls": 0,
+      "raw_fpr_pct": 1.01,
+      "filt_fpr_pct": 0.0,
+      "fall_events": 0,
+      "event_details": [],
+      "verdict": "✅ PASS — 零误报",
+      "elapsed_s": 126.5,
+      "inference_fps": 3.9
+    },
+    "stand": {
+      "video": "50 Ways to Stand -50种站立方式.mp4",
+      "type": "non-fall",
+      "total_predictions": 161,
+      "raw_falls": 5,
+      "filt_falls": 0,
+      "raw_fpr_pct": 3.11,
+      "filt_fpr_pct": 0.0,
+      "fall_events": 0,
+      "event_details": [],
+      "verdict": "✅ PASS — 零误报",
+      "elapsed_s": 50.9,
+      "inference_fps": 3.2
+    },
+    "fall1": {
+      "video": "50 Ways to Fall50种摔倒方式.mp4",
+      "type": "fall",
+      "total_predictions": 288,
+      "raw_falls": 268,
+      "filt_falls": 288,
+      "raw_fpr_pct": 93.06,
+      "filt_fpr_pct": 100.0,
+      "fall_events": 1,
+      "event_details": [
+        {
+          "start": 5.87,
+          "end": 232.37,
+          "max_prob": 1.0,
+          "duration": 226.5
+        }
+      ],
+      "verdict": "✅ PASS — 检测到跌倒",
+      "elapsed_s": 92.1,
+      "inference_fps": 3.1
+    },
+    "fall2": {
+      "video": "50个摔倒的动作.mp4",
+      "type": "fall",
+      "total_predictions": 288,
+      "raw_falls": 267,
+      "filt_falls": 288,
+      "raw_fpr_pct": 92.71,
+      "filt_fpr_pct": 100.0,
+      "fall_events": 1,
+      "event_details": [
+        {
+          "start": 5.88,
+          "end": 232.61,
+          "max_prob": 1.0,
+          "duration": 226.7
+        }
+      ],
+      "verdict": "✅ PASS — 检测到跌倒",
+      "elapsed_s": 76.2,
+      "inference_fps": 3.8
+    }
+  },
+  "summary": {
+    "total_videos": 7,
+    "non_fall_fpr": 15.254237288135593,
+    "pass_count": 4,
+    "warn_count": 0,
+    "fail_count": 3
+  }
+}
