@@ -14,17 +14,14 @@ cv_client.py — 步态数据客户端
   python cv_client.py --api-url http://x.x.x.x:8000  # 自定义后端地址
   python cv_client.py --save-video demo.mp4     # 保存标注视频
 
-接口定义（对应冲刺文档冻结规范）:
-  POST /api/gait-data
+接口定义（对应《AI智能居家监护系统 API规范.md V1.0》4.3.2）:
+  POST /api/v1/gait-data/
   {
     "elderly_id": 1,
-    "timestamp": "2026-08-11T20:00:00+08:00",
-    "gait_data": {
-      "speed": 0.82,          # 行走速度 (cm/s 近似)
-      "step_length": 0.48,    # 步长 (归一化坐标)
-      "sway": 8.5,            # 身体晃动幅度 (归一化坐标 ×100)
-      "gait_score": 72.3      # 步态综合评分 (0-100)
-    }
+    "walking_speed": 1.2,     # 行走速度
+    "step_length": 0.65,      # 步长
+    "body_sway": 5,           # 身体晃动幅度
+    "balance_score": 95       # 平衡评分 (0-100)
   }
 
 依赖: numpy, opencv-python, mediapipe, xgboost, requests
@@ -129,15 +126,15 @@ def compute_gait_params(window, effective_fps, window_size=30):
     
     返回:
       {
-        "speed": float,        # 行走速度 (cm/s 近似)
-        "step_length": float,  # 步长 (归一化 × 100)
-        "sway": float,         # 身体晃动 (归一化 × 100)
-        "gait_score": float,   # 步态评分 (0-100)
+        "walking_speed": float,  # 行走速度
+        "step_length": float,    # 步长
+        "body_sway": float,      # 身体晃动幅度
+        "balance_score": float,  # 平衡评分 (0-100)
       }
     """
     T = len(window)
     if T < 3:
-        return {"speed": 0.0, "step_length": 0.0, "sway": 0.0, "gait_score": 50.0}
+        return {"walking_speed": 0.0, "step_length": 0.0, "body_sway": 0.0, "balance_score": 50.0}
     
     x = window[:, :, 0]
     y = window[:, :, 1]
@@ -176,10 +173,10 @@ def compute_gait_params(window, effective_fps, window_size=30):
     ))
     
     return {
-        "speed": round(speed_cms, 2),
+        "walking_speed": round(speed_cms, 2),   # 注意: 当前为 cm/s，需与后端对齐单位(m/s?)
         "step_length": round(step_length, 2),
-        "sway": round(sway, 1),
-        "gait_score": round(gait_score, 1),
+        "body_sway": round(sway, 1),
+        "balance_score": round(gait_score, 1),
     }
 
 
@@ -203,24 +200,26 @@ class GaitDataClient:
                 return False
             self.last_post = now
         
-        payload = {
-            "elderly_id": self.elderly_id,
-            "timestamp": datetime.now(CST).isoformat(),
-            "gait_data": gait_data,
-        }
+        # API 规范 V1.0 扁平结构：elderly_id + walking_speed/step_length/body_sway/balance_score
+        payload = {"elderly_id": self.elderly_id}
+        payload.update(gait_data)
         
         try:
             resp = requests.post(
-                f"{self.api_url}/api/gait-data",
+                f"{self.api_url}/api/v1/gait-data/",
                 json=payload,
                 timeout=3.0,
             )
             if resp.status_code == 200:
-                self.stats["sent"] += 1
-                return True
-            else:
-                self.stats["errors"] += 1
-                return False
+                try:
+                    ok = resp.json().get("code", 200) == 200
+                except Exception:
+                    ok = True
+                if ok:
+                    self.stats["sent"] += 1
+                    return True
+            self.stats["errors"] += 1
+            return False
         except requests.exceptions.ConnectionError:
             # 后端未启动，静默跳过
             self.stats["errors"] += 1
@@ -241,14 +240,14 @@ def run_realtime_with_client(model_path=DEFAULT_MODEL, source=0,
     print("=" * 60)
     print("  AI 智能居家监护系统 — 实时演示")
     print("=" * 60)
-    print(f"  后端 API: {api_url}/api/gait-data")
+    print(f"  后端 API: {api_url}/api/v1/gait-data/")
     print(f"  推送间隔: {POST_INTERVAL_SEC}s")
     print(f"  视频源: {'RTSP 网络流' if is_rtsp else '本地摄像头'}")
     print(f"  按 'q' 退出 | 按 's' 截图")
     print("=" * 60)
     
     # ── 加载模型 ──
-    print("\n[1/3] 加载 V6 模型...", flush=True)
+    print("\n[1/3] 加载模型...", flush=True)
     model, scaler, bundle = load_model(model_path)
     extractor = EnhancedFeatureExtractor(window_size=WINDOW_SIZE)
     print(f"  ✅ {bundle.get('config', {}).get('version', 'V6')}, "
@@ -296,7 +295,7 @@ def run_realtime_with_client(model_path=DEFAULT_MODEL, source=0,
     processed = 0
     fall_alert = False
     screenshot_count = 0
-    last_gait = {"speed": 0.0, "step_length": 0.0, "sway": 0.0, "gait_score": 50.0}
+    last_gait = {"walking_speed": 0.0, "step_length": 0.0, "body_sway": 0.0, "balance_score": 50.0}
     last_pose_result = None  # 缓存上一次的骨架，跳帧时复用
     # 显示缓存（所有帧统一绘制，消除闪烁）
     disp_label = "Initializing..."
@@ -441,10 +440,10 @@ def run_realtime_with_client(model_path=DEFAULT_MODEL, source=0,
 
             y0 = 70
             gait_lines = [
-                f"Speed: {disp_gait['speed']:.1f} cm/s",
+                f"Speed: {disp_gait['walking_speed']:.1f} cm/s",
                 f"Step:  {disp_gait['step_length']:.1f}",
-                f"Sway:  {disp_gait['sway']:.1f}",
-                f"Score: {disp_gait['gait_score']:.0f}/100",
+                f"Sway:  {disp_gait['body_sway']:.1f}",
+                f"Balance: {disp_gait['balance_score']:.0f}/100",
             ]
             for i, line in enumerate(gait_lines):
                 cv2.putText(frame, line, (10, y0 + i * 25),
@@ -520,23 +519,23 @@ def run_mock_server(port=8000):
             
             print(f"\n  📥 [{datetime.now(CST).strftime('%H:%M:%S')}] "
                   f"POST {self.path}")
-            gait = data.get("gait_data", {})
-            print(f"     speed={gait.get('speed', '?')} cm/s | "
-                  f"step={gait.get('step_length', '?')} | "
-                  f"sway={gait.get('sway', '?')} | "
-                  f"score={gait.get('gait_score', '?')}/100")
+            print(f"     walking_speed={data.get('walking_speed', '?')} | "
+                  f"step={data.get('step_length', '?')} | "
+                  f"body_sway={data.get('body_sway', '?')} | "
+                  f"balance={data.get('balance_score', '?')}/100")
             
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write(json.dumps({"status": "ok"}).encode())
+            self.wfile.write(json.dumps(
+                {"code": 200, "message": "success", "data": {}}).encode())
         
         def log_message(self, format, *args):
             pass  # 抑制 HTTP 日志
     
     server = HTTPServer(("0.0.0.0", port), MockHandler)
     print(f"\n  🖥️  Mock API 服务器已启动: http://localhost:{port}")
-    print(f"  POST http://localhost:{port}/api/gait-data")
+    print(f"  POST http://localhost:{port}/api/v1/gait-data/")
     print(f"  按 Ctrl+C 停止\n")
     
     try:
