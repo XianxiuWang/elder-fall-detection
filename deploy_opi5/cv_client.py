@@ -18,9 +18,9 @@ cv_client.py — 步态数据客户端
   POST /api/v1/gait-data/
   {
     "elderly_id": 1,
-    "walking_speed": 1.2,     # 行走速度
-    "step_length": 0.65,      # 步长
-    "body_sway": 5,           # 身体晃动幅度
+    "walking_speed": 1.2,     # 行走速度 (m/s)
+    "step_length": 0.65,      # 步长 (m)
+    "body_sway": 5,           # 身体晃动幅度 (归一化坐标×100)
     "balance_score": 95       # 平衡评分 (0-100)
   }
 
@@ -126,9 +126,9 @@ def compute_gait_params(window, effective_fps, window_size=30):
     
     返回:
       {
-        "walking_speed": float,  # 行走速度
-        "step_length": float,    # 步长
-        "body_sway": float,      # 身体晃动幅度
+        "walking_speed": float,  # 行走速度 (m/s)
+        "step_length": float,    # 步长 (m)
+        "body_sway": float,      # 身体晃动幅度 (归一化×100)
         "balance_score": float,  # 平衡评分 (0-100)
       }
     """
@@ -154,7 +154,7 @@ def compute_gait_params(window, effective_fps, window_size=30):
     right_ankle_y = y[:, 28]
     ankle_diff = np.abs(left_ankle_y - right_ankle_y)
     # 步长: 脚踝差值的 95 分位数 (过滤站立时小值)
-    step_length = float(np.percentile(ankle_diff, 95)) * 100
+    step_length = float(np.percentile(ankle_diff, 95)) * PIXEL_TO_CM / 100  # 米（归一化×1.8m标定）
     
     # ── 3. 身体晃动 ──
     # 双肩中点 X 坐标的 std → 侧向晃动量
@@ -173,10 +173,10 @@ def compute_gait_params(window, effective_fps, window_size=30):
     ))
     
     return {
-        "walking_speed": round(speed_cms, 2),   # 注意: 当前为 cm/s，需与后端对齐单位(m/s?)
-        "step_length": round(step_length, 2),
-        "body_sway": round(sway, 1),
-        "balance_score": round(gait_score, 1),
+        "walking_speed": round(speed_cms / 100, 2),   # m/s（speed_cms 为 cm/s，÷100 换算）
+        "step_length": round(step_length, 2),          # m
+        "body_sway": round(sway, 1),                   # 归一化×100（无量纲晃动幅度）
+        "balance_score": round(gait_score, 1),         # 0-100
     }
 
 
@@ -440,8 +440,8 @@ def run_realtime_with_client(model_path=DEFAULT_MODEL, source=0,
 
             y0 = 70
             gait_lines = [
-                f"Speed: {disp_gait['walking_speed']:.1f} cm/s",
-                f"Step:  {disp_gait['step_length']:.1f}",
+                f"Speed: {disp_gait['walking_speed']:.2f} m/s",
+                f"Step:  {disp_gait['step_length']:.2f} m",
                 f"Sway:  {disp_gait['body_sway']:.1f}",
                 f"Balance: {disp_gait['balance_score']:.0f}/100",
             ]
@@ -519,8 +519,8 @@ def run_mock_server(port=8000):
             
             print(f"\n  📥 [{datetime.now(CST).strftime('%H:%M:%S')}] "
                   f"POST {self.path}")
-            print(f"     walking_speed={data.get('walking_speed', '?')} | "
-                  f"step={data.get('step_length', '?')} | "
+            print(f"     walking_speed={data.get('walking_speed', '?')} m/s | "
+                  f"step={data.get('step_length', '?')} m | "
                   f"body_sway={data.get('body_sway', '?')} | "
                   f"balance={data.get('balance_score', '?')}/100")
             
