@@ -88,10 +88,10 @@ except ImportError:
 
 # ── 检查模型文件 ──
 echo ""
-if [ -f "$SCRIPT_DIR/models/fall_classifier_6class.pkl" ]; then
-    echo "  ✓ 模型文件已就绪"
+if [ -f "$SCRIPT_DIR/models/fall_classifier_6class_v8.pkl" ]; then
+    echo "  ✓ 模型文件已就绪 (fall_classifier_6class_v8.pkl)"
 else
-    echo "  ⚠ 模型文件未找到: models/fall_classifier_6class.pkl"
+    echo "  ⚠ 模型文件未找到: models/fall_classifier_6class_v8.pkl"
     echo "  请将模型文件复制到 deploy_opi5/models/ 目录"
 fi
 

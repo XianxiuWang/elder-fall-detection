@@ -9,6 +9,9 @@ xgboost>=2.0,<4.0
 # 视频处理（ARM64 有预编译轮子）
 opencv-python>=4.8
 
+# HTTP 推送（cv_client.py 上传步态数据给后端）
+requests>=2.31
+
 # MediaPipe — ARM64 需要特定版本
 # 0.10.14 有 aarch64 轮子：pip install mediapipe==0.10.14
 # 如果安装失败，尝试：
