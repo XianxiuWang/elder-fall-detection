@@ -17,10 +17,7 @@ baselines/
 *.log
 
 # --- 模型 & 权重 ---
-# *.pkl / *.joblib / *.onnx / *.pt 已改由 git-lfs 管理 (见 .gitattributes)
-*.task
-*.tflite
-*.pth
+# *.pkl / *.joblib / *.onnx / *.pt / *.pth / *.tflite / *.task 已改由 git-lfs 管理 (见 .gitattributes)
 
 # --- 系统镜像 & 可执行 ---
 *.img
