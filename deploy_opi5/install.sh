@@ -66,6 +66,9 @@ pip install "scikit-learn>=1.5,<2.0" "xgboost>=2.0,<4.0"
 # OpenCV
 pip install "opencv-python>=4.8"
 
+# HTTP 推送（cv_client.py 上传步态数据给后端）
+pip install "requests>=2.31"
+
 # MediaPipe — ARM64 特殊处理
 echo "  安装 MediaPipe (ARM64)..."
 pip install "mediapipe>=0.10.14,<0.11" 2>/dev/null || {
@@ -80,6 +83,7 @@ import numpy; print(f'  numpy: {numpy.__version__}')
 import sklearn; print(f'  sklearn: {sklearn.__version__}')
 import xgboost; print(f'  xgboost: {xgboost.__version__}')
 import cv2; print(f'  opencv: {cv2.__version__}')
+import requests; print(f'  requests: {requests.__version__}')
 try:
     import mediapipe; print(f'  mediapipe: {mediapipe.__version__}')
 except ImportError:

@@ -80,7 +80,7 @@ goto end
 :mock_only
 echo.
 echo 🚀 启动 Mock API 服务器 (localhost:8000)...
-echo    POST http://localhost:8000/api/gait-data
+echo    POST http://localhost:8000/api/v1/gait-data/
 echo    按 Ctrl+C 停止
 echo ============================================================
 %PYTHON% -c "from cv_client import run_mock_server; run_mock_server(8000)"

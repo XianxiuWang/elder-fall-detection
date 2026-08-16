@@ -43,7 +43,7 @@ if ($SetupKey) {
     Step "Configure passwordless SSH login"
     $key = "$env:USERPROFILE\.ssh\id_ed25519_opi5"
     if (-not (Test-Path $key)) {
-        ssh-keygen -t ed25519 -f $key -N '""' -C "opi5-deploy"
+        ssh-keygen -t ed25519 -f $key -N '' -C "opi5-deploy"
     }
     $pub = (Get-Content "$key.pub" -Raw).Trim()
     Write-Host "  You will be asked for the board password ONCE, then it's passwordless."
