@@ -5,3 +5,6 @@
 *.pth filter=lfs diff=lfs merge=lfs -text
 *.tflite filter=lfs diff=lfs merge=lfs -text
 *.task filter=lfs diff=lfs merge=lfs -text
+
+# 部署脚本强制 LF（Linux 板上 bash 执行，CRLF 会报 $'\r' 错误）
+*.sh text eol=lf
